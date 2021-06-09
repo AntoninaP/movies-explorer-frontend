@@ -1,0 +1,31 @@
+.navtab {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0 0 30px 0;
+    list-style-type: none;
+}
+
+.navtab__list {
+    margin-right: 10px;
+}
+
+.navtab__button {
+    width: 96px;
+    background-color: #303030;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    margin: 0;
+}
+
+.navtab__list:last-child {
+    margin-right: 0;
+}
