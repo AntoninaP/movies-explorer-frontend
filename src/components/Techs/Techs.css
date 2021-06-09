@@ -1,12 +1,19 @@
 .techs {
     display: flex;
+    width: 100%;
+    background-color: #272727;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0;
+}
+
+.techs__box {
+    display: flex;
+    width: calc(100% - 2*70px);
     margin: 100px 0 0 0;
-    width: 100%;
-    background-color: #272727;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .techs__title {
@@ -39,6 +46,7 @@
     padding: 0;
     margin: 100px 0 100px 0;
     list-style-type: none;
+    max-width: 100%;
 }
 
 .techs__item:last-child {
@@ -56,4 +64,67 @@
     margin: 0 10px 0 0;
     text-align: center;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .techs__box {
+        width: calc(100% - 2*50px);
+        margin-top: 90px;
+    }
+    .techs__title {
+        width: calc(100% - 2*84px);
+        padding-top: 80px;
+        padding-bottom: 22px;
+    }
+    .techs__text {
+        width: calc(100% - 2*154px);
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .techs__list {
+        margin-top: 83px;
+        margin-bottom: 90px;
+    }
+    .techs__item {
+        width: 84px;
+        font-size: 12px;
+        line-height: 14.52px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .techs {
+        background-color: #202020;
+    }
+    .techs__box {
+        width: calc(100% - 2*14px);
+        margin-top: 70px;
+    }
+    .techs__title {
+        width: 100%;
+        font-size: 30px;
+        line-height: 36px;
+        padding-top: 60px;
+        padding-bottom: 24px;
+    }
+    .techs__text {
+        width: 100%;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .techs__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 10px;
+        padding: 0;
+        margin-top: 50px;
+        margin-bottom: 70px;
+    }
+    .techs__item {
+        width: 84px;
+        font-size: 12px;
+        line-height: 14.52px;
+        margin-right: 0;
+    }
 }

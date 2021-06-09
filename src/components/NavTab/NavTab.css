@@ -29,3 +29,20 @@
 .navtab__list:last-child {
     margin-right: 0;
 }
+
+@media screen and (max-width: 320px) {
+    .navtab {
+        margin-bottom: 17px;
+    }
+    .navtab__list {
+        margin-right: 6px;
+    }
+    .navtab__button {
+        width: 82px;
+        font-size: 10px;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 6px;
+    }
+}

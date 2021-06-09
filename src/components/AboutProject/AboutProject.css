@@ -5,14 +5,16 @@
     justify-content: center;
     padding: 0;
     margin: 110px 0 0 0;
-    width: 100%;
-}
-.aboutproject__content {
     width: calc(100% - 2*70px);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+}
+
+.aboutproject__content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 26px 40px;
+    margin-top: 70px;
+    grid-auto-flow: column;
 }
 
 .aboutproject__text-title {
@@ -21,7 +23,6 @@
     font-weight: 400;
     text-align: left;
     color: #FFFFFF;
-    padding: 70px 40px 26px 0;
     margin: 0;
 }
 
@@ -36,37 +37,87 @@
 }
 
 .aboutproject__time-table {
-    width: calc(100% - 2*70px);
+    width: 100%;
     margin: 110px 0 110px 0;
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: repeat(2, 1fr);
-}
-
-.aboutproject__backend {
-    background-color: #3DDC84;
     font-size: 14px;
     line-height: 16.94px;
     font-weight: 400;
     text-align: center;
+}
+
+.aboutproject__backend {
+    background-color: #3DDC84;
     padding: 9px 0 9px 0;
 }
 
 .aboutproject__frontend {
     background-color: #303030;
     color: #FFFFFF;
-    font-size: 14px;
-    line-height: 16.94px;
-    font-weight: 400;
-    text-align: center;
     padding: 9px 0 9px 0;
 }
 
 .aboutproject__subject {
     color: #8B8B8B;
-    font-size: 14px;
-    line-height: 17px;
     font-weight: 500;
-    text-align: center;
     padding: 14px 0 0 0;
+}
+
+@media screen and (max-width: 768px) {
+    .aboutproject {
+        margin-top: 90px;
+        width: calc(100% - 2*50px);
+    }
+    .aboutproject__content {
+        gap: 22px 30px;
+        margin-top: 70px;
+    }
+    .aboutproject__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .aboutproject__time-table {
+        margin-top: 93px;
+        margin-bottom: 121px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .aboutproject {
+        margin-top: 70px;
+        width: calc(100% - 2*18px);
+    }
+    .aboutproject__content {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, auto);
+        gap: 0;
+        margin-top: 60px;
+        grid-auto-flow: column;
+    }
+    .aboutproject__text-title {
+        font-size: 18px;
+        line-height: 21.78px;
+        font-weight: 400;
+        margin-bottom: 16px;
+    }
+    .aboutproject__text {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom: 56px;
+    }
+    .aboutproject__time-table {
+        margin-top: 4px;
+        margin-bottom: 70px;
+        grid-template-columns: 35% 65%;
+        font-size: 11px;
+        line-height: 13.5px;
+    }
+    .aboutproject__subject {
+        font-weight: 400;
+        padding-top: 10px;
+        line-height: 12.74px;
+    }
 }

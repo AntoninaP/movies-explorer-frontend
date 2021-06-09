@@ -9,9 +9,9 @@
 }
 
 .promo__background {
+    display: flex;
     width: calc(100% - 2*40px);
     background: #272727;
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -27,4 +27,31 @@
     text-align: center;
     padding: 160px 0 217px 0;
     margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .promo__background {
+        width: calc(100% - 2*20px);
+    }
+    .promo__title {
+        width: calc(100% - 2*24px);
+        font-size: 40px;
+        line-height: 52px;
+        padding-top: 350px;
+        padding-bottom: 314px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .promo__background {
+        width: calc(100% - 2*14px);
+        margin-top: 14px;
+    }
+    .promo__title {
+        width: 100%;
+        font-size: 29px;
+        line-height: 37px;
+        padding-top: 220px;
+        padding-bottom: 212px;
+    }
 }
