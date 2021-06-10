@@ -5,7 +5,6 @@ function Portfolio() {
 
   return (
     <section className="portfolio">
-      <div className="portfolio__box">
         <div className="portfolio__title">Портфолио</div>
         <div className="portfolio__item">
           <p className="portfolio__project">Статичный сайт</p>
@@ -25,7 +24,6 @@ function Portfolio() {
             <img src={arrow} alt="изображение стрелки" className="portfolio__icon"/>
           </a>
         </div>
-      </div>
     </section>
   );
 }

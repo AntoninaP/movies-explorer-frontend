@@ -29,6 +29,12 @@
     margin: 0;
 }
 
+@media screen and (max-width: 1250px) {
+    .promo__title {
+        width: calc(100% - 2 * 70px);
+    }
+}
+
 @media screen and (max-width: 768px) {
     .promo__background {
         width: calc(100% - 2*20px);
@@ -37,12 +43,13 @@
         width: calc(100% - 2*24px);
         font-size: 40px;
         line-height: 52px;
+        letter-spacing: -0.04em;
         padding-top: 350px;
         padding-bottom: 314px;
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
     .promo__background {
         width: calc(100% - 2*14px);
         margin-top: 14px;
