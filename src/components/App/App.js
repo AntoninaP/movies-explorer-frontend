@@ -1,10 +1,9 @@
 import React from "react";
+import {Route, Switch} from 'react-router-dom';
 import Header from "../Header/Header";
-import Promo from "../Promo/Promo";
-import AboutProject from "../AboutProject/AboutProject";
-import Techs from "../Techs/Techs";
-import AboutMe from "../AboutMe/AboutMe";
 import Footer from "../Footer/Footer";
+import Movies from "../Movies/Movies";
+import Main from "../Main/Main";
 
 
 function App() {
@@ -12,10 +11,14 @@ function App() {
     <div className="app__root">
       <div className="app__page">
         <Header/>
-        <Promo/>
-        <AboutProject/>
-        <Techs/>
-        <AboutMe/>
+        <Switch>
+          <Route exact path="/">
+            <Main/>
+          </Route>
+          <Route path="/movies">
+            <Movies/>
+          </Route>
+        </Switch>
         <Footer/>
       </div>
     </div>
