@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../images/logo.svg";
 import {Route, Link} from 'react-router-dom';
 import Navigation from "../Navigation/Navigation";
+import Menu from "../Menu/Menu";
 
 
 function Header() {
@@ -26,6 +27,7 @@ function Header() {
       <Route path="/profile">
         <Navigation/>
       </Route>
+      <Menu/>
     </header>
   );
 }

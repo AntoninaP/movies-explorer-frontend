@@ -1,0 +1,23 @@
+.menu {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        width: 520px;
+        height: 100vh;
+        position: fixed;
+        margin: auto;
+        top: 0;
+        right: 0;
+        background-color: #202020;
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .menu {
+        width: 100vw;
+        height: 100vh;
+    }
+}
