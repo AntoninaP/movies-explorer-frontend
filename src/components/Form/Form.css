@@ -1,0 +1,117 @@
+.form {
+    width: 396px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form__title {
+    font-size: 24px;
+    line-height: 29.05px;
+    font-weight: 500;
+    color: #FFFFFF;
+    padding: 0;
+    margin: 22px 0 40px 0;
+}
+
+.form__box {
+    width: 100%;
+}
+
+.form__text {
+    color: #8B8B8B;
+    font-size: 10px;
+    line-height: 12.1px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+}
+
+.form__input {
+    background-color: #2F2F2F;
+    color: #FFFFFF;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 15.73px;
+    font-weight: 400;
+    padding: 15px 0 15px 15px;
+    margin: 10px 0 20px 0;
+}
+
+.form__text_error {
+    color: #EE3465;
+    margin-top: -10px;
+}
+
+.form__input::-webkit-input-placeholder {
+    color: #FFFFFF;
+}
+
+.form__input:-moz-placeholder {
+    color: #FFFFFF;
+}
+
+.form__input_error::-webkit-input-placeholder {
+    color: #EE3465;
+}
+
+.form__input_error:-moz-placeholder {
+    color: #EE3465;
+}
+
+.form__submit-button {
+    width: 100%;
+    margin: 69px 0 16px 0;
+    background-color: #4285F4;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 500;
+    padding: 13px 0 15px 0;
+    border: none;
+    border-radius: 3px;
+}
+
+.form__link-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    line-height: 16.94px;
+    font-weight: 400;
+    margin-bottom: 70px;
+}
+
+.form__link-text {
+    color: #8B8B8B;
+    padding: 0;
+    margin: 0;
+}
+
+.form__link {
+    color: #4285F4;
+    padding: 0;
+    margin: 0 0 0 6px;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 400px) {
+    .form {
+        width: 260px;
+        align-items: center;
+    }
+    .form__title {
+        margin-top: 32px;
+        margin-bottom: 80px;
+    }
+    .form__input {
+        width: calc(100% - 15px);
+    }
+
+
+}

@@ -1,0 +1,86 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navigation__main-link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    visibility: hidden;
+}
+
+.navigation__movies-link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-left: 16px;
+}
+
+.navigation__saved-movies-link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-left: 16px;
+}
+
+.navigation__menu-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation__profile-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navigation__account {
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 12px;
+    font-weight: 500;
+    margin: 0 7px 0 0;
+    padding: 0;
+}
+
+.navigation__account-ico {
+    width: 24px;
+    height: 24px;
+}
+
+.navigation__burger-ico {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .navigation__links {
+        display: none;
+    }
+    .navigation__profile-block {
+        display: none;
+    }
+    .navigation__burger-ico {
+        display: block;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navigation__burger-ico {
+        width: 40px;
+        height: 43px;
+    }
+}
