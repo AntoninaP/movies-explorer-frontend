@@ -9,38 +9,65 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-
+import ProtectedRoute from "../ProtectedRoute";
+import Menu from "../Menu/Menu";
 
 function App() {
+
+  // const [loggedIn, setLoggedIn] = React.useState(false);
+const [isMenuOpen, setMenuOpen] = React.useState(false);
+
+function handleMenuButtonClick() {
+  setMenuOpen(true);
+}
+
+function handleCloseButtonClick() {
+  setMenuOpen(false);
+}
+
+
   return (
     <div className="app__root">
       <div className="app__page">
-        <Header/>
+        <Header
+        onMenuOpen={handleMenuButtonClick}/>
         <Switch>
           <Route exact path="/">
+            {/*// loggedIn={loggedIn}*/}
             <Main/>
           </Route>
-          <Route path="/movies">
+          <Route exact path="/movies">
+            {/*// loggedIn={loggedIn}*/}
+            {/*// component={Movies}*/}
             <Movies/>
           </Route>
-          <Route path="/saved-movies">
+          <Route exact path="/saved-movies">
+            {/*// loggedIn={loggedIn}*/}
             <SavedMovies/>
+            {/*component={SavedMovies}*/}
           </Route>
-          <Route path="/profile">
+          <Route exact path="/profile">
+            {/*// loggedIn={loggedIn}*/}
             <Profile/>
+            {/*component={Profile}*/}
           </Route>
-          <Route path="*">
+          <Route path="/404">
             <PageNotFound/>
           </Route>
         </Switch>
         <Footer/>
-
-        <Route path="/signup">
-          <Register/>
-        </Route>
-        <Route path="/signin">
-          <Login/>
-        </Route>
+        <Switch>
+          <Route exact path="/signup">
+            <Register/>
+          </Route>
+          <Route exact path="/signin">
+            <Login/>
+          </Route>
+        </Switch>
+        {/*{loggedIn && <Footer/>}*/}
+        <Menu/>
+          {/*// isOpen={isMenuOpen}*/}
+          {/*//     onClose={closePopup}/>*/}
       </div>
     </div>
   );

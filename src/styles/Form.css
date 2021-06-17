@@ -41,6 +41,13 @@
     margin: 10px 0 20px 0;
 }
 
+.form__input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #4285F4;
+    box-shadow: none;
+}
+
 .form__text_error {
     color: #EE3465;
     margin-top: -10px;
@@ -75,6 +82,12 @@
     border-radius: 3px;
 }
 
+.form__submit-button:hover {
+    cursor: pointer;
+    font-weight: 520;
+    box-shadow: 5px 5px 5px #000000;
+}
+
 .form__link-block {
     display: flex;
     flex-direction: row;
@@ -98,6 +111,11 @@
     padding: 0;
     margin: 0 0 0 6px;
     text-decoration: none;
+}
+
+.form__link:hover {
+    text-decoration: underline;
+    font-weight: 420;
 }
 
 @media screen and (max-width: 400px) {

@@ -8,7 +8,7 @@ function SearchForm() {
   return (
     <div className="searchform">
       <form className="searchform__field">
-        <label>
+        <label className="searchform__lable">
         <input id="searchform-input" type="text" name="searchform-input"
                value='' className="searchform__input"
                placeholder="Фильм" required minLength="2" maxLength="30"/>

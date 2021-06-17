@@ -41,3 +41,9 @@
     height: auto;
     object-fit: cover;
 }
+
+.moviescard__picture:hover {
+    cursor: pointer;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}

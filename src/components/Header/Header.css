@@ -26,6 +26,13 @@
     text-decoration: none;
 }
 
+.header__signup:hover {
+    border-bottom: 1px solid #FFFFFF;
+    font-weight: 520;
+    opacity: 60%;
+    transition: opacity linear 2s;
+}
+
 .header__signin {
     color: #000000;
     background-color: #3DDC84;
@@ -34,6 +41,13 @@
     padding: 8px 20px 8px 20px;
     margin: 21px 0 21px 0;
     text-decoration: none;
+}
+
+.header__signin:hover {
+    font-weight: 520;
+    text-decoration: underline;
+    opacity: 60%;
+    transition: opacity linear 2s;
 }
 
 @media screen and (max-width: 768px) {

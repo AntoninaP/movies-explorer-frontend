@@ -47,6 +47,13 @@
     margin-left: 20px;
 }
 
+.footer__link:hover {
+    border-bottom: 1px solid #FFFFFF;
+    font-weight: 420;
+    opacity: 60%;
+    transition: opacity linear 2s;
+}
+
 @media screen and (max-width: 768px) {
     .footer {
         width: calc(100% - 2*30px);

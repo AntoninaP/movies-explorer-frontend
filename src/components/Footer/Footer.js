@@ -13,7 +13,6 @@ function Footer() {
           <a className="footer__link" href="https://github.com/">Github</a>
         </div>
       </div>
-
     </footer>
   );
 }

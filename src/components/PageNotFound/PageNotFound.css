@@ -37,6 +37,12 @@
     background-color: #202020;
 }
 
+.page-not-found__button:hover {
+    text-decoration: underline;
+    font-weight: 420;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 400px) {
     .page-not-found__title {
         font-size: 80px;

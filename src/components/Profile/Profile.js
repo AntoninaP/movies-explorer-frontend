@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from 'react-router-dom';
 
 function Profile() {
 
@@ -25,7 +25,7 @@ function Profile() {
         </label>
       </form>
       <button type="submit" className="profile__edit-button">Редактировать</button>
-      <button className="profile__exit-button">Выйти из аккаунта</button>
+      <Link to="/" className="profile__exit-link">Выйти из аккаунта</Link>
     </section>
   );
 }

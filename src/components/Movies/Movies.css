@@ -20,6 +20,12 @@
     margin: 50px 0 80px 0;
 }
 
+.movies__button:hover {
+    cursor: pointer;
+    font-weight: 520;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
 @media screen and (max-width: 768px) {
     .movies {
         width: calc(100% - 2 * 30px);

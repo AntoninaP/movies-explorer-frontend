@@ -44,6 +44,11 @@
     width: 29px;
 }
 
+.portfolio__icon:hover {
+    opacity: 60%;
+    transition: opacity linear 2s;
+}
+
 @media screen and (max-width: 768px) {
     .portfolio {
         margin-top: 90px;

@@ -5,7 +5,7 @@ function Techs() {
   return (
     <section className="techs">
       <div className="techs__box">
-        <h3 className="section__title">Технологии</h3>
+        <h3 className="section__title"><a name="techs"></a>Технологии</h3>
         <h2 className="techs__title">7 технологий</h2>
         <p className="techs__text">На курсе веб-разработки мы освоили технологии,
           которые применили в дипломном проекте.</p>
