@@ -9,8 +9,10 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import ProtectedRoute from "../ProtectedRoute";
+// import ProtectedRoute from "../ProtectedRoute";
 import Menu from "../Menu/Menu";
+import Navigation from "../Navigation/Navigation";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
 
@@ -29,25 +31,30 @@ function handleCloseButtonClick() {
   return (
     <div className="app__root">
       <div className="app__page">
-        <Header
-        onMenuOpen={handleMenuButtonClick}/>
         <Switch>
           <Route exact path="/">
+            <Header/>
             {/*// loggedIn={loggedIn}*/}
             <Main/>
           </Route>
           <Route exact path="/movies">
             {/*// loggedIn={loggedIn}*/}
             {/*// component={Movies}*/}
+            <Navigation
+            onMenuOpen={handleMenuButtonClick}/>
             <Movies/>
           </Route>
           <Route exact path="/saved-movies">
             {/*// loggedIn={loggedIn}*/}
+            <Navigation
+              onMenuOpen={handleMenuButtonClick}/>
             <SavedMovies/>
             {/*component={SavedMovies}*/}
           </Route>
           <Route exact path="/profile">
             {/*// loggedIn={loggedIn}*/}
+            <Navigation
+              onMenuOpen={handleMenuButtonClick}/>
             <Profile/>
             {/*component={Profile}*/}
           </Route>
@@ -65,8 +72,10 @@ function handleCloseButtonClick() {
           </Route>
         </Switch>
         {/*{loggedIn && <Footer/>}*/}
-        <Menu/>
-          {/*// isOpen={isMenuOpen}*/}
+        <Menu
+          isOpen={isMenuOpen}
+          onClose={handleCloseButtonClick}
+        />
           {/*//     onClose={closePopup}/>*/}
       </div>
     </div>

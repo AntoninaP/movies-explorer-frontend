@@ -28,7 +28,7 @@ function Navigation(props) {
           <img src={profile_ico} alt="кнопка профайла пользователя" className="navigation__account-ico"/>
         </Link>
         <img src={burger_menu_ico} alt="иконка меню" className="navigation__burger-ico"
-        onClick={props.isMenuOpen}/>
+        onClick={props.onMenuOpen}/>
       </div>
     </section>
   );

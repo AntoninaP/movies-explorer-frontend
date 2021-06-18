@@ -19,5 +19,6 @@
 @import url(components/Profile/Profile.css);
 @import url(components/PageNotFound/PageNotFound.css);
 @import url(components/Menu/Menu.css);
+@import url(components/Preloader/Preloader.css);
 @import url(styles/section__title.css);
 @import url(styles/Form.css);

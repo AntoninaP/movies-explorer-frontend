@@ -21,7 +21,7 @@
         align-items: center;
     }
 
-    .menu__close-button {
+    .menu__close-button_visible {
         display: block;
         position: fixed;
         margin: auto;
