@@ -123,10 +123,12 @@
         width: 260px;
         align-items: center;
     }
+
     .form__title {
         margin-top: 32px;
         margin-bottom: 80px;
     }
+
     .form__input {
         width: calc(100% - 15px);
     }

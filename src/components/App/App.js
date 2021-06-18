@@ -9,24 +9,20 @@ import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-// import ProtectedRoute from "../ProtectedRoute";
 import Menu from "../Menu/Menu";
 import Navigation from "../Navigation/Navigation";
-import Preloader from "../Preloader/Preloader";
 
 function App() {
 
-  // const [loggedIn, setLoggedIn] = React.useState(false);
-const [isMenuOpen, setMenuOpen] = React.useState(false);
+  const [isMenuOpen, setMenuOpen] = React.useState(false);
 
-function handleMenuButtonClick() {
-  setMenuOpen(true);
-}
+  function handleMenuButtonClick() {
+    setMenuOpen(true);
+  }
 
-function handleCloseButtonClick() {
-  setMenuOpen(false);
-}
-
+  function handleCloseButtonClick() {
+    setMenuOpen(false);
+  }
 
   return (
     <div className="app__root">
@@ -34,35 +30,30 @@ function handleCloseButtonClick() {
         <Switch>
           <Route exact path="/">
             <Header/>
-            {/*// loggedIn={loggedIn}*/}
             <Main/>
+            <Footer/>
           </Route>
           <Route exact path="/movies">
-            {/*// loggedIn={loggedIn}*/}
-            {/*// component={Movies}*/}
             <Navigation
-            onMenuOpen={handleMenuButtonClick}/>
+              onMenuOpen={handleMenuButtonClick}/>
             <Movies/>
+            <Footer/>
           </Route>
           <Route exact path="/saved-movies">
-            {/*// loggedIn={loggedIn}*/}
             <Navigation
               onMenuOpen={handleMenuButtonClick}/>
             <SavedMovies/>
-            {/*component={SavedMovies}*/}
+            <Footer/>
           </Route>
           <Route exact path="/profile">
-            {/*// loggedIn={loggedIn}*/}
             <Navigation
               onMenuOpen={handleMenuButtonClick}/>
             <Profile/>
-            {/*component={Profile}*/}
           </Route>
           <Route path="/404">
             <PageNotFound/>
           </Route>
         </Switch>
-        <Footer/>
         <Switch>
           <Route exact path="/signup">
             <Register/>
@@ -71,12 +62,10 @@ function handleCloseButtonClick() {
             <Login/>
           </Route>
         </Switch>
-        {/*{loggedIn && <Footer/>}*/}
         <Menu
           isOpen={isMenuOpen}
           onClose={handleCloseButtonClick}
         />
-          {/*//     onClose={closePopup}/>*/}
       </div>
     </div>
   );
