@@ -1,0 +1,20 @@
+.savedmovies {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 2 * 70px);
+    margin-bottom: 79px;
+}
+
+@media screen and (max-width: 768px) {
+    .savedmovies {
+        width: calc(100% - 2 * 30px);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .savedmovies {
+        width: calc(100% - 2 * 14px);
+    }
+}
