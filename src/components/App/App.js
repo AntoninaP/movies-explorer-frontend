@@ -15,6 +15,7 @@ import Navigation from "../Navigation/Navigation";
 function App() {
 
   const [isMenuOpen, setMenuOpen] = React.useState(false);
+  // const [isMovieSaved, setMovieSaved] = React.useState(false);
 
   function handleMenuButtonClick() {
     setMenuOpen(true);
@@ -23,6 +24,10 @@ function App() {
   function handleCloseButtonClick() {
     setMenuOpen(false);
   }
+
+  // function handleSaveMovieButtonClick() {
+  //   setMovieSaved(true);
+  // }
 
   return (
     <div className="app__root">
@@ -37,6 +42,7 @@ function App() {
             <Navigation
               onMenuOpen={handleMenuButtonClick}/>
             <Movies/>
+            {/*// onMovieSave={handleSaveMovieButtonClick}/>*/}
             <Footer/>
           </Route>
           <Route exact path="/saved-movies">

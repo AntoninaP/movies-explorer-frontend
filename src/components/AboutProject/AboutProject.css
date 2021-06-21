@@ -84,7 +84,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 450px) {
     .aboutproject {
         margin-top: 70px;
         width: calc(100% - 2*18px);

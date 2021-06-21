@@ -30,6 +30,25 @@
     padding: 0;
 }
 
+.moviescard__savebutton {
+    border: none;
+    padding: 0;
+    background: url("../../images/save9d.svg") 0 0 no-repeat;
+    width: 30px;
+    height: 30px;
+    margin: 19px 14px 19px 0;
+}
+
+.moviescard__savebutton:hover {
+    cursor: pointer;
+    opacity: 60%;
+    transition: opacity linear 1s;
+}
+
+.moviescard__savebutton_active {
+    background: url("../../images/save_active.svg") 0 0 no-repeat;
+}
+
 .moviescard__icon {
     width: 30px;
     height: 30px;
