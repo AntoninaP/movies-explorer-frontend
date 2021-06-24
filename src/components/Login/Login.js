@@ -41,8 +41,8 @@ function Login(props) {
                  onChange={handleChange}/>
           <p className="form__text form__text_error">Что-то пошло не так</p>
         </label>
+        <button type="submit" className="form__submit-button">Войти</button>
       </form>
-      <button type="submit" className="form__submit-button">Войти</button>
       <div className="form__link-block">
         <p className="form__link-text">Еще не зарегистрированы?</p>
         <Link to="/signup" className="form__link">Регистрация</Link>

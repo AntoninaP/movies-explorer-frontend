@@ -13,7 +13,7 @@ class MainApi {
 
   // запрос данных пользователя с сервера
   getProfileInfo() {
-    return fetch(this.baseUrl + 'users/me', {
+    return fetch(this.baseUrl + '/users/me', {
       headers: this.headers
     })
       .then(this._checkResponse)
@@ -21,7 +21,7 @@ class MainApi {
 
   // редактирование данных пользователя
   editProfileInfo(name, email) {
-    return fetch(this.baseUrl + 'users/me', {
+    return fetch(this.baseUrl + '/users/me', {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({

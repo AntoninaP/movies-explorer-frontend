@@ -16,6 +16,18 @@ import * as Auth from "../../utils/Auth";
 import newMainApi from "../../utils/MainApi";
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const {pathname} = useLocation();
+  const history = useHistory();
+
+  const MainRoute = '/';
+  const isRegisterRoute = '/signup' == pathname;
+  const isLoginRoute = '/signin' == pathname;
+  const ProfileRoute = '/profile';
+  const MovieRoute = '/movies';
+  const SaveMovieRoute = '/saved-movies';
+
+  console.log(pathname)
 
   const [currentUser, setCurrentUser] = React.useState({name: '', email: ''});
 
@@ -25,14 +37,18 @@ function App() {
     password: ''
   });
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  //переход по ссылкам в шапке профиля регистрация-войти
-  const {pathname} = useLocation();
-  const history = useHistory();
 
+  //константы для бургерного меню
+  const [isMenuOpen, setMenuOpen] = React.useState(false);
+
+  // const [isMovieSaved, setMovieSaved] = React.useState(false);
+
+
+//методы для регистрации, авторизации
   React.useEffect(() => {
     if (loggedIn) {
-      history.push('/');
+      console.log(1, loggedIn)
+      history.push('/movies');
     }
   }, [history, loggedIn])
 
@@ -40,11 +56,9 @@ function App() {
     tokenCheck();
   }, [history, loggedIn])
 
-  //методы для регистрации, авторизации
   function handleRegistration({name, email, password}) {
     Auth.registration({name, email, password})
       .then(() => {
-
         // setRegisterStatus(true)
         // setInfoToolTipOpen(true);
         history.push('/signin')
@@ -59,10 +73,11 @@ function App() {
   function handleAuthorization({email, password}) {
     Auth.authorization({email, password})
       .then((data) => {
+        console.log(data.token, email, password)
         localStorage.setItem('jwt', data.token);
         newMainApi.setToken();
         setLoggedIn(true);
-        history.push('/');
+        history.push('/movies');
       })
       .catch((err) => {
         console.log('error', err)
@@ -75,6 +90,7 @@ function App() {
       Auth.getContent(jwt)
         .then(({email}) => {
           if (email) {
+            console.log(2, loggedIn, email, jwt)
             setLoggedIn(true);
           }
         })
@@ -91,13 +107,21 @@ function App() {
       password: ''
     });
     setLoggedIn(false);
-    history.push('/signin');
+    history.push('/');
   }
 
-  const [isMenuOpen, setMenuOpen] = React.useState(false);
+  //редактирование профиля
+  function handleUpdateUser(user) {
+    newMainApi.editProfileInfo(user.name, user.email)
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
 
-  // const [isMovieSaved, setMovieSaved] = React.useState(false);
-
+  //бургерное меню
   function handleMenuButtonClick() {
     setMenuOpen(true);
   }
@@ -114,20 +138,23 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app__root">
         <div className="app__page">
+          {!isRegisterRoute && !isLoginRoute &&
+          <Header
+            currentPath={pathname}
+            loggedIn={loggedIn}
+            // email={currentUser.email}
+          />
+          }
 
-            <Header
-              currentPath={pathname}
-              // onLogOut={handleLogOut}
-              email={currentUser.email}/>
           <Switch>
-              <Route exact path="/">
-                <Main/>
-              </Route>
+            <Route exact path="/">
+              <Main/>
+            </Route>
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
                             component={Movies}
-                            /*// onMovieSave={handleSaveMovieButtonClick}/>*/
+              /*// onMovieSave={handleSaveMovieButtonClick}/>*/
             />
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}
@@ -137,12 +164,15 @@ function App() {
             <ProtectedRoute path="/profile"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
+                            onUpdateUser={handleUpdateUser}
+                            onLogOut={handleLogOut}
                             component={Profile}
             />
             <Route path="/404">
               <PageNotFound/>
             </Route>
           </Switch>
+          {!isRegisterRoute && !isLoginRoute && <Footer/>}
           <Switch>
             <Route path="/signup">
               <Register onRegister={handleRegistration}/>

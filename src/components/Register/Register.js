@@ -32,7 +32,7 @@ function Register(props) {
         <img src={logo} alt="логотип"/>
       </Link>
       <h3 className="form__title">Добро пожаловать!</h3>
-      <form className="form__box" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form__box">
         <label className="form__lable">
           <p className="form__text">Имя</p>
           <input id="form__input-name" type="text" name="name"
@@ -52,8 +52,8 @@ function Register(props) {
                  required placeholder="" onChange={handleChange}/>
           <p className="form__text form__text_error">Что-то пошло не так</p>
         </label>
+        <button type="submit" className="form__submit-button">Зарегистрироваться</button>
       </form>
-      <button type="submit" className="form__submit-button">Зарегистрироваться</button>
       <div className="form__link-block">
         <p className="form__link-text">Уже зарегистрированы?</p>
         <Link to="/signin" className="form__link">Войти</Link>
