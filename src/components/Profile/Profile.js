@@ -58,7 +58,8 @@ function Profile(props) {
           {/*<span className="searchform__input-error">*/}
           {/*</span>*/}
         </label>
-        <button type="submit" className="profile__edit-button">Редактировать</button>
+        <button type="submit" className="profile__edit-button"
+                onClick={props.onPopupOpen}>Редактировать</button>
       </form>
       <Link to="/" className="profile__exit-link" onClick={props.onLogOut}>
         Выйти из аккаунта</Link>

@@ -14,6 +14,7 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
 import * as Auth from "../../utils/Auth";
 import newMainApi from "../../utils/MainApi";
+import Popup from "../Popup/Popup";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -30,6 +31,7 @@ function App() {
   console.log(pathname)
 
   const [currentUser, setCurrentUser] = React.useState({name: '', email: ''});
+  const [editProfileStatus, setEditProfileStatus] = React.useState(false);
 
   //константы для регистрации, авторизации
   const [data, setData] = React.useState({
@@ -38,8 +40,10 @@ function App() {
   });
 
 
-  //константы для бургерного меню
+  //открытие-закрытие попапов
   const [isMenuOpen, setMenuOpen] = React.useState(false);
+  const [isPopupOpen, setPopupOpen] = React.useState(false);
+
 
   // const [isMovieSaved, setMovieSaved] = React.useState(false);
 
@@ -59,14 +63,10 @@ function App() {
   function handleRegistration({name, email, password}) {
     Auth.registration({name, email, password})
       .then(() => {
-        // setRegisterStatus(true)
-        // setInfoToolTipOpen(true);
         history.push('/signin')
       })
       .catch((err) => {
         console.log('error', err)
-        // setRegisterStatus(false)
-        // setInfoToolTipOpen(true);
       })
   }
 
@@ -88,10 +88,10 @@ function App() {
     if (localStorage.getItem('jwt')) {
       let jwt = localStorage.getItem('jwt');
       Auth.getContent(jwt)
-        .then(({email}) => {
+        .then(({email, name}) => {
           if (email) {
-            console.log(2, loggedIn, email, jwt)
             setLoggedIn(true);
+            setCurrentUser({email, name})
           }
         })
         .catch((err) => {
@@ -115,8 +115,11 @@ function App() {
     newMainApi.editProfileInfo(user.name, user.email)
       .then((data) => {
         setCurrentUser(data);
+        // setPopupOpen(true);
+        setEditProfileStatus(true);
       })
       .catch((err) => {
+        setEditProfileStatus(false);
         console.log('error', err)
       })
   }
@@ -126,8 +129,17 @@ function App() {
     setMenuOpen(true);
   }
 
-  function handleCloseButtonClick() {
+  function handleMenuCloseButtonClick() {
     setMenuOpen(false);
+  }
+
+  //попап подтверждения изменения профиля
+  function handlePopupOpen() {
+    setPopupOpen(true);
+  }
+
+  function handlePopupCloseButtonClick() {
+    setPopupOpen(false);
   }
 
   // function handleSaveMovieButtonClick() {
@@ -164,6 +176,7 @@ function App() {
             <ProtectedRoute path="/profile"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
+                            onPopupOpen={handlePopupOpen}
                             onUpdateUser={handleUpdateUser}
                             onLogOut={handleLogOut}
                             component={Profile}
@@ -186,7 +199,12 @@ function App() {
           </Switch>
           <Menu
             isOpen={isMenuOpen}
-            onClose={handleCloseButtonClick}
+            onClose={handleMenuCloseButtonClick}
+          />
+          <Popup
+            isOpen={isPopupOpen}
+            onPopupClose={handlePopupCloseButtonClick}
+            isEditProfileSuccessful={editProfileStatus}
           />
         </div>
       </div>
