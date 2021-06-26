@@ -6,8 +6,8 @@ function Movies(props) {
 
   return (
     <section className="movies">
-      <SearchForm/>
-      <MoviesCardList />
+      <SearchForm onSearch={props.onSearch}/>
+      <MoviesCardList/>
       <button className="movies__button">Еще</button>
     </section>
   );

@@ -36,6 +36,29 @@ class MainApi {
     this.headers.authorization = `Bearer ${localStorage.getItem('jwt')}`;
   }
 
+  // добавление нового фильма
+  // addNewMovie(country, director, duration, year, description, image, trailer, thumbnail,
+  //             nameRU, nameEN, movieId) {
+  //   return fetch(this.baseUrl + '/movies', {
+  //     method: 'POST',
+  //     headers: this.headers,
+  //     body: JSON.stringify({
+  //       country: country,
+  //       director: director,
+  //       duration: duration,
+  //       year: year,
+  //       description: description,
+  //       image: image,
+  //       trailer: trailer,
+  //       thumbnail: thumbnail,
+  //       nameRU: nameRU,
+  //       nameEN: nameEN,
+  //       movieId: movieId,
+  //     })
+  //   })
+  //     .then(this._checkResponse)
+  // }
+
 }
 
 const newMainApi = new MainApi({

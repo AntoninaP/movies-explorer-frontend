@@ -13,10 +13,11 @@ class MoviesApi {
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  // загрузка массива фильмов с сервера
+  // загрузка массива фильмов
   getInitialMovies() {
-    return fetch(this.baseUrl + 'movies', {
-      headers: this.headers
+    return fetch(this.baseUrl, {
+      headers: this.headers,
+      method: "GET"
     })
       .then(this._checkResponse)
   }
@@ -77,9 +78,8 @@ class MoviesApi {
 
 const newMoviesApi = new MoviesApi({
 
-  baseUrl: '/https://api.nomoreparties.co/beatfilm-movies',
+  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
   headers: {
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 })

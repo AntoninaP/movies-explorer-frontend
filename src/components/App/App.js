@@ -14,9 +14,11 @@ import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
 import * as Auth from "../../utils/Auth";
 import newMainApi from "../../utils/MainApi";
+import newMoviesApi from "../../utils/MoviesApi";
 import Popup from "../Popup/Popup";
+import useFormWithValidation from "../FormValidator/FormValidator";
 
-function App() {
+function App(props) {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const {pathname} = useLocation();
   const history = useHistory();
@@ -28,8 +30,6 @@ function App() {
   const MovieRoute = '/movies';
   const SaveMovieRoute = '/saved-movies';
 
-  console.log(pathname)
-
   const [currentUser, setCurrentUser] = React.useState({name: '', email: ''});
   const [editProfileStatus, setEditProfileStatus] = React.useState(false);
 
@@ -39,13 +39,13 @@ function App() {
     password: ''
   });
 
-
   //открытие-закрытие попапов
   const [isMenuOpen, setMenuOpen] = React.useState(false);
   const [isPopupOpen, setPopupOpen] = React.useState(false);
 
-
-  // const [isMovieSaved, setMovieSaved] = React.useState(false);
+//фильмы
+  const [movies, setMovies] = React.useState([]);
+  const [isMovieSaved, setMovieSaved] = React.useState(false);
 
 
 //методы для регистрации, авторизации
@@ -142,6 +142,42 @@ function App() {
     setPopupOpen(false);
   }
 
+  React.useEffect(() => {
+    newMoviesApi.getInitialMovies()
+      .then((data) => {
+        setMovies(data)
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }, [history, loggedIn])
+
+
+  function handleMovieSearch(value) {
+    console.log(value);
+    const words = value.split(" ")
+    movies.forEach(movie => {
+      words.forEach(word => {
+        if (movie.nameRU != null && movie.nameRU.indexOf(word) != -1 ||
+          movie.nameEN != null && movie.nameEN.indexOf(word) != -1) {
+          console.log(movie);
+          // props.isMovieSearched(movie);
+        }
+      })
+    })
+  }
+
+  // function handleAddMovieCard(movie) {
+  //   newMainApi.addNewMovie(movie.name, movie.image)
+  //     .then((newMovie) => {
+  //       setMovie([newMovie, ...movies]);
+  //     })
+  //     .catch((err) => {
+  //       console.log('error', err)
+  //     })
+  // }
+
   // function handleSaveMovieButtonClick() {
   //   setMovieSaved(true);
   // }
@@ -165,7 +201,9 @@ function App() {
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
+                            onSearch={handleMovieSearch}
                             component={Movies}
+                            // isMovieSearched={movie}
               /*// onMovieSave={handleSaveMovieButtonClick}/>*/
             />
             <ProtectedRoute path="/saved-movies"
@@ -188,7 +226,8 @@ function App() {
           {!isRegisterRoute && !isLoginRoute && <Footer/>}
           <Switch>
             <Route path="/signup">
-              <Register onRegister={handleRegistration}/>
+              <Register onRegister={handleRegistration}
+                        isValidate={useFormWithValidation}/>
             </Route>
             <Route path="/signin">
               <Login

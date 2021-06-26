@@ -1,15 +1,36 @@
 import React from "react";
 import icon from "../../images/icon.svg";
 
-function SearchForm() {
+function SearchForm(props) {
+
+  const [data, setData] = React.useState({
+    name: ''
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // const data = e.target;
+
+    // const {name} = data;
+    // console.log(data);
+    props.onSearch(data.search)
+  }
+
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setData({
+      ...data,
+      [name]: value
+    })
+  }
 
   return (
 
-      <form className="searchform">
+      <form className="searchform" onSubmit={handleSubmit}>
         <div className="searchform__field">
           <label className="searchform__lable">
-            <input id="searchform-input" type="text" name="searchform-input"
-                   value='' className="searchform__input"
+            <input id="searchform-input" type="text" name="search"
+                   value={data.search} className="searchform__input" onChange={handleChange}
                    placeholder="Фильм" required minLength="2" maxLength="30"/>
           </label>
           <button type="submit" className="searchform__button">
