@@ -45,6 +45,7 @@ function App(props) {
 
 //фильмы
   const [movies, setMovies] = React.useState([]);
+  const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [isMovieSaved, setMovieSaved] = React.useState(false);
 
 
@@ -155,13 +156,14 @@ function App(props) {
 
 
   function handleMovieSearch(value) {
-    console.log(value);
+    setSearchedMovies([]);
+    console.log(searchedMovies.length)
     const words = value.split(" ")
     movies.forEach(movie => {
       words.forEach(word => {
         if (movie.nameRU != null && movie.nameRU.indexOf(word) != -1 ||
           movie.nameEN != null && movie.nameEN.indexOf(word) != -1) {
-          console.log(movie);
+          setSearchedMovies([...searchedMovies, movie])
           // props.isMovieSearched(movie);
         }
       })
@@ -181,6 +183,7 @@ function App(props) {
   // function handleSaveMovieButtonClick() {
   //   setMovieSaved(true);
   // }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -203,6 +206,7 @@ function App(props) {
                             onMenuOpen={handleMenuButtonClick}
                             onSearch={handleMovieSearch}
                             component={Movies}
+                            movies={searchedMovies}
                             // isMovieSearched={movie}
               /*// onMovieSave={handleSaveMovieButtonClick}/>*/
             />

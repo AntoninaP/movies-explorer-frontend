@@ -1,18 +1,21 @@
 import React from "react";
-import pic1 from "../../images/pic1.jpg";
+import PopupPreview from "../PopupPreview/PopupPreview";
 
-function MoviesCard() {
+function MoviesCard(props) {
+
+  const img = 'https://api.nomoreparties.co'+props.movie.image.url;
 
   return (
     <div className="moviescard">
       <div className="moviescard__description">
         <div className="moviescard__text">
-          <h3 className="moviescard__title">33 слова о дизайне</h3>
-          <p className="moviescard__duration">1ч 47м</p>
+          <h3 className="moviescard__title">{props.movie.nameRU}</h3>
+          <p className="moviescard__duration">{props.movie.duration}</p>
         </div>
         <button className="moviescard__savebutton"></button>
       </div>
-      <img src={pic1} alt="кадр из фильма" className="moviescard__picture"/>
+      <img src={img} alt="кадр из фильма" className="moviescard__picture"
+      onClick={props.onPopupPreviewOpen}/>
     </div>
   );
 }

@@ -1,0 +1,38 @@
+.popup-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.popup-preview__close-button {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+    margin-right: -550px;
+}
+
+.popup-preview__close-button:hover {
+    cursor: pointer;
+}
+
+.popup-preview_iframe {
+    width: 560px;
+    height: 315px;
+}
+
+@media screen and (max-width: 600px) {
+    .popup-preview_iframe {
+        width: 80vw;
+        height: auto;
+    }
+
+    .popup-preview__close-button {
+        margin-right: -250px;
+    }
+}

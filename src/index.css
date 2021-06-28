@@ -21,5 +21,6 @@
 @import url(components/Menu/Menu.css);
 @import url(components/Preloader/Preloader.css);
 @import url(components/Popup/Popup.css);
+@import url(components/PopupPreview/PopupPreview.css);
 @import url(styles/section__title.css);
 @import url(styles/Form.css);
