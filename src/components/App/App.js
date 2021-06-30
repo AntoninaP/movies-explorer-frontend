@@ -30,7 +30,7 @@ function App(props) {
   const MovieRoute = '/movies';
   const SaveMovieRoute = '/saved-movies';
 
-  const [currentUser, setCurrentUser] = React.useState({name: '', email: ''});
+  const [currentUser, setCurrentUser] = React.useState({_id: '', name: '', email: ''});
   const [editProfileStatus, setEditProfileStatus] = React.useState(false);
 
   //константы для регистрации, авторизации
@@ -46,14 +46,13 @@ function App(props) {
 //фильмы
   const [movies, setMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
-  const [isMovieSaved, setMovieSaved] = React.useState(false);
-
+  const [savedMovies, setSavedMovies] = React.useState([]);
 
 //методы для регистрации, авторизации
   React.useEffect(() => {
     if (loggedIn) {
-      console.log(1, loggedIn)
       history.push('/movies');
+      getSaveMovies();
     }
   }, [history, loggedIn])
 
@@ -89,10 +88,10 @@ function App(props) {
     if (localStorage.getItem('jwt')) {
       let jwt = localStorage.getItem('jwt');
       Auth.getContent(jwt)
-        .then(({email, name}) => {
+        .then(({_id, email, name}) => {
           if (email) {
             setLoggedIn(true);
-            setCurrentUser({email, name})
+            setCurrentUser({_id, email, name})
           }
         })
         .catch((err) => {
@@ -156,33 +155,68 @@ function App(props) {
 
 
   function handleMovieSearch(value) {
-    setSearchedMovies([]);
-    console.log(searchedMovies.length)
-    const words = value.split(" ")
+    let a = [];
+    // const words = value
     movies.forEach(movie => {
-      words.forEach(word => {
-        if (movie.nameRU != null && movie.nameRU.indexOf(word) != -1 ||
-          movie.nameEN != null && movie.nameEN.indexOf(word) != -1) {
-          setSearchedMovies([...searchedMovies, movie])
-          // props.isMovieSearched(movie);
+      // words.forEach(word => {
+      if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
+        movie.nameEN != null && movie.nameEN.indexOf(value) !== -1) {
+        const foundMovie = JSON.parse(JSON.stringify(movie))
+        foundMovie.thumbnail = 'https://api.nomoreparties.co'+ movie.image.formats.thumbnail.url;
+        foundMovie.image = 'https://api.nomoreparties.co'+ movie.image.url;
+        if (isLiked(movie.id)) {
+          foundMovie.owner = currentUser._id;
         }
-      })
+        a.push(foundMovie);
+      }
+      // })
     })
+    setSearchedMovies(a);
   }
 
-  // function handleAddMovieCard(movie) {
-  //   newMainApi.addNewMovie(movie.name, movie.image)
-  //     .then((newMovie) => {
-  //       setMovie([newMovie, ...movies]);
-  //     })
-  //     .catch((err) => {
-  //       console.log('error', err)
-  //     })
-  // }
+  //проверяем наличие лайка по id
+  function isLiked(movieId) {
+    for (const movie of savedMovies) {
+      console.log(movie, movieId)
+      if (movie.movieId === movieId) {
+        return true
+      }
+    }
+    return false
+  }
 
-  // function handleSaveMovieButtonClick() {
-  //   setMovieSaved(true);
-  // }
+  function handleMovieLike(movie) {
+    console.log(movie)
+    // Отправляем запрос в API и сохраняем фильм в базу пользователя
+    newMainApi.addNewMovie(movie)
+      .then(() => {
+        console.log(movie)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
+
+  function getSaveMovies() {
+    newMainApi.getMovies()
+      .then((movies) => {
+        setSavedMovies(movies)
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
+
+  function handleMovieDislike(movieId) {
+    newMainApi.deleteMovie(movieId)
+      .then(() => {
+        console.log(movieId)
+
+      })
+      .catch((err) => {
+        console.log('error', err)
+      })
+  }
 
 
   return (
@@ -207,13 +241,15 @@ function App(props) {
                             onSearch={handleMovieSearch}
                             component={Movies}
                             movies={searchedMovies}
-                            // isMovieSearched={movie}
-              /*// onMovieSave={handleSaveMovieButtonClick}/>*/
+                            saveMovie={handleMovieLike}
+                            deleteMovie={handleMovieDislike}
             />
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
                             component={SavedMovies}
+                            movies={savedMovies}
+                            deleteMovie={handleMovieDislike}
             />
             <ProtectedRoute path="/profile"
                             loggedIn={loggedIn}

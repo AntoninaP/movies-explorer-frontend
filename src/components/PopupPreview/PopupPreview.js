@@ -10,17 +10,14 @@ function PopupPreview(props) {
         <img src={close_ico} alt="иконка закрытия попапа"
              className="popup-preview__close-button"
              onClick={props.onClose}/>
-        <iframe className='popup-preview_iframe'
-                src="https://www.youtube.com/embed/UXcqcdYABFw"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-              gyroscope; picture-in-picture"
-                allowFullScreen>
-        </iframe>
+        <video className='popup-preview_video'
+                src={props.movie.trailerLink}>
+        </video>
       </div>
     </section>
   );
 }
 
 export default PopupPreview;
+
+// src={props.movie.trailerLink.replace(/watch\?v=/, "embed/")}

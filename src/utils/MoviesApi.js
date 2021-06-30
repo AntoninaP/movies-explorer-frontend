@@ -1,5 +1,4 @@
 
-
 class MoviesApi {
   constructor(options) {
     this.baseUrl = options.baseUrl;

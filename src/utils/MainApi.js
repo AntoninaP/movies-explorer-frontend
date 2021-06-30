@@ -36,28 +36,46 @@ class MainApi {
     this.headers.authorization = `Bearer ${localStorage.getItem('jwt')}`;
   }
 
-  // добавление нового фильма
-  // addNewMovie(country, director, duration, year, description, image, trailer, thumbnail,
-  //             nameRU, nameEN, movieId) {
-  //   return fetch(this.baseUrl + '/movies', {
-  //     method: 'POST',
-  //     headers: this.headers,
-  //     body: JSON.stringify({
-  //       country: country,
-  //       director: director,
-  //       duration: duration,
-  //       year: year,
-  //       description: description,
-  //       image: image,
-  //       trailer: trailer,
-  //       thumbnail: thumbnail,
-  //       nameRU: nameRU,
-  //       nameEN: nameEN,
-  //       movieId: movieId,
-  //     })
-  //   })
-  //     .then(this._checkResponse)
-  // }
+  //добавление нового фильма
+  addNewMovie({country, director, duration, year, description, image, trailerLink,
+              nameRU, nameEN, id, thumbnail}) {
+    return fetch(this.baseUrl + '/movies', {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify({
+        country: country,
+        director: director,
+        duration: duration,
+        year: year,
+        description: description,
+        image: image.url,
+        trailer: trailerLink,
+        thumbnail: thumbnail,
+        nameRU: nameRU,
+        nameEN: nameEN,
+        movieId: id,
+      })
+    })
+      .then(this._checkResponse)
+  }
+
+  //получить все сохраненные пользователем фильмы
+  getMovies() {
+    return fetch(this.baseUrl + '/movies', {
+      method: 'GET',
+      headers: this.headers,
+    })
+      .then(this._checkResponse)
+  }
+
+  //удалить фильм по id
+  deleteMovie(movieId) {
+    return fetch(this.baseUrl + `/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: this.headers,
+    })
+      .then(this._checkResponse)
+  }
 
 }
 

@@ -22,12 +22,15 @@ function MoviesCardList(props) {
             <>
               <MoviesCard movie={movie} key={movie.id}
                           onPopupPreviewOpen={handlePopupPreviewClick}
+                          setLike={props.setLike}
+                          // isLiked={}
+
               />
-              <PopupPreview isOpen={isPopupPreviewOpen}
-              onClose={handlePopupPreviewButtonClick}/>
+              <PopupPreview movie={movie}
+                            isOpen={isPopupPreviewOpen}
+                            onClose={handlePopupPreviewButtonClick}/>
             </>
           ))
-      }
       }
     </section>
   );

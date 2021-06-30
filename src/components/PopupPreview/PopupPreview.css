@@ -21,13 +21,14 @@
     cursor: pointer;
 }
 
-.popup-preview_iframe {
+.popup-preview_video {
     width: 560px;
     height: 315px;
+    border: 1px solid red;
 }
 
 @media screen and (max-width: 600px) {
-    .popup-preview_iframe {
+    .popup-preview_video {
         width: 80vw;
         height: auto;
     }
