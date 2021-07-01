@@ -27,6 +27,7 @@
     font-weight: 400;
     border: none;
     margin-left: 22px;
+    width: 300px;
 }
 
 .searchform__input:focus {

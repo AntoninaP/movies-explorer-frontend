@@ -5,25 +5,14 @@ function MoviesCard(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const isLiked = props.movie.owner === currentUser._id;
 
-  console.log(props.movie.nameRU, props.movie.owner, currentUser._id)
-
-//
-// // Создаём переменную, которую после зададим в `className` для кнопки удаления
-//   const movieDeleteButtonClassName = (
-//     `moviescard__deletebutton ${isOwn ? 'moviescard__deletebutton' : 'moviescard__deletebutton_hidden'}`
-//   );
-//
-//   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-//   const isLiked = props.movie.likes.some(i => i === currentUser._id);
-//
-// // Создаём переменную, которую после зададим в `className` для кнопки лайка
-//   const movieLikeButtonClassName = (
-//     `moviescard__likebutton ${isLiked ? 'moviescard__likebutton_active' : 'moviescard__likebutton'}`
-//   );
-
+  // console.log(props.movie.nameRU, props.movie.owner, currentUser._id)
 
   function handleLike(e) {
-    props.setLike(props.movie)
+    if (isLiked) {
+      props.setDislike(props.movie.movieId ? props.movie.movieId : props.movie.id)
+    } else {
+      props.setLike(props.movie)
+    }
   }
 
 

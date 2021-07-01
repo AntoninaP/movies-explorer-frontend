@@ -48,7 +48,7 @@ class MainApi {
         duration: duration,
         year: year,
         description: description,
-        image: image.url,
+        image: image,
         trailer: trailerLink,
         thumbnail: thumbnail,
         nameRU: nameRU,
@@ -76,7 +76,6 @@ class MainApi {
     })
       .then(this._checkResponse)
   }
-
 }
 
 const newMainApi = new MainApi({

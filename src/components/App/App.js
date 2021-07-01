@@ -52,7 +52,6 @@ function App(props) {
   React.useEffect(() => {
     if (loggedIn) {
       history.push('/movies');
-      getSaveMovies();
     }
   }, [history, loggedIn])
 
@@ -146,11 +145,11 @@ function App(props) {
     newMoviesApi.getInitialMovies()
       .then((data) => {
         setMovies(data)
-        console.log(data)
       })
       .catch((err) => {
         console.log('error', err)
       })
+    getSaveMovies();
   }, [history, loggedIn])
 
 
@@ -177,7 +176,6 @@ function App(props) {
   //проверяем наличие лайка по id
   function isLiked(movieId) {
     for (const movie of savedMovies) {
-      console.log(movie, movieId)
       if (movie.movieId === movieId) {
         return true
       }
@@ -186,11 +184,11 @@ function App(props) {
   }
 
   function handleMovieLike(movie) {
-    console.log(movie)
     // Отправляем запрос в API и сохраняем фильм в базу пользователя
     newMainApi.addNewMovie(movie)
-      .then(() => {
-        console.log(movie)
+      .then((m) => {
+        movie.owner = m.owner;
+        setSavedMovies([...savedMovies, m]);
       })
       .catch((err) => {
         console.log('error', err)
@@ -200,7 +198,7 @@ function App(props) {
   function getSaveMovies() {
     newMainApi.getMovies()
       .then((movies) => {
-        setSavedMovies(movies)
+        setSavedMovies(movies);
       })
       .catch((err) => {
         console.log('error', err)
@@ -208,10 +206,10 @@ function App(props) {
   }
 
   function handleMovieDislike(movieId) {
+    console.log(movieId)
     newMainApi.deleteMovie(movieId)
       .then(() => {
-        console.log(movieId)
-
+        getSaveMovies()
       })
       .catch((err) => {
         console.log('error', err)
@@ -227,10 +225,8 @@ function App(props) {
           <Header
             currentPath={pathname}
             loggedIn={loggedIn}
-            // email={currentUser.email}
           />
           }
-
           <Switch>
             <Route exact path="/">
               <Main/>

@@ -7,7 +7,7 @@ function Movies(props) {
   return (
     <section className="movies">
       <SearchForm onSearch={props.onSearch}/>
-      <MoviesCardList movies={props.movies} setLike={props.saveMovie}/>
+      <MoviesCardList movies={props.movies} setLike={props.saveMovie} setDislike={props.deleteMovie}/>
       <button className="movies__button">Еще</button>
     </section>
   );

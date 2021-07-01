@@ -20,10 +20,9 @@ function MoviesCardList(props) {
         props.movies.map((movie) =>
           (
             <>
-              <MoviesCard movie={movie} key={movie.id}
+              <MoviesCard movie={movie} key={movie.movieId ? movie.movieId : movie.id}
                           onPopupPreviewOpen={handlePopupPreviewClick}
-                          setLike={props.setLike}
-                          // isLiked={}
+                          setLike={props.setLike} setDislike={props.setDislike}
 
               />
               <PopupPreview movie={movie}
@@ -38,9 +37,3 @@ function MoviesCardList(props) {
 
 export default MoviesCardList;
 
-{/*props.movies.map((movie, i) => (*/
-}
-{/*<MoviesCard key={movie._id} movies={movies}*/
-}
-{/*/>*/
-}

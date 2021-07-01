@@ -39,6 +39,12 @@ function Register(props) {
                  value={data.name} className="form__input" placeholder="Антонина"
                  required minLength="2" maxLength="30"
                  pattern="([а-яА-Яёa-zA-Z0-9.]|\s|-)*" onChange={handleChange}/>
+          {/*<span*/}
+          {/*  className={`error page-with-form__error ${*/}
+          {/*    registerError ? "page-with-form__error_active" : ""*/}
+          {/*  }`}>*/}
+          {/*      {registerError.message}*/}
+          {/*    </span>*/}
         </label>
         <label className="form__lable">
           <p className="form__text">E-mail</p>
@@ -53,9 +59,11 @@ function Register(props) {
                  required placeholder="" onChange={handleChange}/>
           <p className="form__text form__text_error">Что-то пошло не так</p>
         </label>
-        <button type="submit" className={`${props.isValid ? 'form__submit-button' : 
-                  'form__submit-button form__submit-button_novalidate'}`}
-        >Зарегистрироваться</button>
+        <button type="submit" className={`${props.isValid ? 'form__submit-button' :
+          'form__submit-button form__submit-button_novalidate'}`}
+                // disabled={!props.isValid}
+        >Зарегистрироваться
+        </button>
       </form>
       <div className="form__link-block">
         <p className="form__link-text">Уже зарегистрированы?</p>
