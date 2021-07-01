@@ -61,6 +61,10 @@ function App() {
     tokenCheck();
   }, [history, loggedIn])
 
+  React.useEffect(() => {
+    setSearchedMovies([])
+  }, [history])
+
   function handleRegistration({name, email, password}) {
     Auth.registration({name, email, password})
       .then(() => {
@@ -165,11 +169,9 @@ function App() {
 
   function handleMovieSearch(value) {
     preloaderOn();
-    setTimeout(() => {
+    // setTimeout(() => {
       let a = [];
-      // const words = value
       movies.forEach(movie => {
-        // words.forEach(word => {
         if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
           movie.nameEN != null && movie.nameEN.indexOf(value) !== -1) {
           const foundMovie = JSON.parse(JSON.stringify(movie))
@@ -180,11 +182,10 @@ function App() {
           }
           a.push(foundMovie);
         }
-        // })
       })
       preloaderOff();
       setSearchedMovies(a);
-    }, 5000)
+    // }, 5000)
 
   }
 
