@@ -80,7 +80,7 @@ class MainApi {
 
 const newMainApi = new MainApi({
 
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.movies-explorer-ap.nomoredomains.icu/',
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'

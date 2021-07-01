@@ -17,6 +17,7 @@ import newMainApi from "../../utils/MainApi";
 import newMoviesApi from "../../utils/MoviesApi";
 import Popup from "../Popup/Popup";
 import useFormWithValidation from "../FormValidator/FormValidator";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -47,6 +48,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isPreloaderOn, setPreloaderOn] = React.useState(false);
 
 //методы для регистрации, авторизации
   React.useEffect(() => {
@@ -86,6 +88,7 @@ function App() {
   const tokenCheck = () => {
     if (localStorage.getItem('jwt')) {
       let jwt = localStorage.getItem('jwt');
+      console.log(jwt)
       Auth.getContent(jwt)
         .then(({_id, email, name}) => {
           if (email) {
@@ -152,25 +155,37 @@ function App() {
     getSaveMovies();
   }, [history, loggedIn])
 
+  function preloaderOn() {
+    setPreloaderOn(true)
+  }
+
+  function preloaderOff() {
+    setPreloaderOn(false)
+  }
 
   function handleMovieSearch(value) {
-    let a = [];
-    // const words = value
-    movies.forEach(movie => {
-      // words.forEach(word => {
-      if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
-        movie.nameEN != null && movie.nameEN.indexOf(value) !== -1) {
-        const foundMovie = JSON.parse(JSON.stringify(movie))
-        foundMovie.thumbnail = 'https://api.nomoreparties.co'+ movie.image.formats.thumbnail.url;
-        foundMovie.image = 'https://api.nomoreparties.co'+ movie.image.url;
-        if (isLiked(movie.id)) {
-          foundMovie.owner = currentUser._id;
+    preloaderOn();
+    setTimeout(() => {
+      let a = [];
+      // const words = value
+      movies.forEach(movie => {
+        // words.forEach(word => {
+        if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
+          movie.nameEN != null && movie.nameEN.indexOf(value) !== -1) {
+          const foundMovie = JSON.parse(JSON.stringify(movie))
+          foundMovie.thumbnail = 'https://api.nomoreparties.co'+ movie.image.formats.thumbnail.url;
+          foundMovie.image = 'https://api.nomoreparties.co'+ movie.image.url;
+          if (isLiked(movie.id)) {
+            foundMovie.owner = currentUser._id;
+          }
+          a.push(foundMovie);
         }
-        a.push(foundMovie);
-      }
-      // })
-    })
-    setSearchedMovies(a);
+        // })
+      })
+      preloaderOff();
+      setSearchedMovies(a);
+    }, 5000)
+
   }
 
   //проверяем наличие лайка по id
@@ -234,6 +249,7 @@ function App() {
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
+                            onPreloaderOn={preloaderOn}
                             onSearch={handleMovieSearch}
                             component={Movies}
                             movies={searchedMovies}
@@ -280,6 +296,9 @@ function App() {
             isOpen={isPopupOpen}
             onPopupClose={handlePopupCloseButtonClick}
             isEditProfileSuccessful={editProfileStatus}
+          />
+          <Preloader
+          isOn={isPreloaderOn}
           />
         </div>
       </div>

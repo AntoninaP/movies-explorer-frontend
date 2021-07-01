@@ -15,6 +15,12 @@ function MoviesCard(props) {
     }
   }
 
+  let buttonClass = 'moviescard__likebutton'
+  if (props.fromSaved) {
+    buttonClass = 'moviescard__likebutton_delete'
+  } else if (isLiked) {
+    buttonClass = 'moviescard__likebutton_active'
+  }
 
   return (
     <div className="moviescard">
@@ -23,8 +29,7 @@ function MoviesCard(props) {
           <h3 className="moviescard__title">{props.movie.nameRU}</h3>
           <p className="moviescard__duration">{props.movie.duration}</p>
         </div>
-        <button className={`moviescard__likebutton ${isLiked ?
-          'moviescard__likebutton_active' : 'moviescard__likebutton'}`}
+        <button className={`moviescard__likebutton ${buttonClass}`}
                 onClick={handleLike}></button>
       </div>
       <img src={props.movie.image} alt="кадр из фильма" className="moviescard__picture"

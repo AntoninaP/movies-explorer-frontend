@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Preloader() {
+function Preloader(props) {
     return (
-        <div className="preloader">
+        <div className={`preloader ${props.isOn ? 'preloader' : 'preloader_off'}`}>
             <div className="preloader__container">
                 <span className="preloader__round"></span>
             </div>

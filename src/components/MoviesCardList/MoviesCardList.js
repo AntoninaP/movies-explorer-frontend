@@ -23,6 +23,7 @@ function MoviesCardList(props) {
               <MoviesCard movie={movie} key={movie.movieId ? movie.movieId : movie.id}
                           onPopupPreviewOpen={handlePopupPreviewClick}
                           setLike={props.setLike} setDislike={props.setDislike}
+                          fromSaved={props.fromSaved}
 
               />
               <PopupPreview movie={movie}

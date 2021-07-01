@@ -14,6 +14,7 @@ function SearchForm(props) {
     // const {name} = data;
     // console.log(data);
     props.onSearch(data.search)
+    props.onPreloaderOn()
   }
 
   function handleChange(e) {
