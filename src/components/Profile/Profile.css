@@ -45,6 +45,20 @@
     text-align: left;
 }
 
+.profile__text_error {
+    color: #EE3465;
+    margin-top: 10px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+    width: 100%;
+}
+
+.profile__text_error_disabled {
+    display: none;
+}
+
 .profile__input {
     border: none;
     background-color: #202020;

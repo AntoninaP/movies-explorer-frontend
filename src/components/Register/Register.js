@@ -1,29 +1,17 @@
 import React from "react";
 import logo from "../../images/logo.svg";
 import {Link} from 'react-router-dom';
+import useFormWithValidation from "../FormValidator/FormValidator";
 
 
 function Register(props) {
 
-  const [data, setData] = React.useState({
-    name: '',
-    email: '',
-    password: ''
-  });
+  const {values, handleChange, resetForm, errors, isValid} = useFormWithValidation()
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(data);
-    const {name, email, password} = data;
-    props.onRegister({name, email, password})
-  }
-
-  function handleChange(e) {
-    const {name, value} = e.target;
-    setData({
-      ...data,
-      [name]: value
-    })
+    const {name, email, password} = values;
+    props.onRegister({name, email, password});
   }
 
   return (
@@ -36,33 +24,34 @@ function Register(props) {
         <label className="form__lable">
           <p className="form__text">Имя</p>
           <input id="form__input-name" type="text" name="name"
-                 value={data.name} className="form__input" placeholder="Антонина"
+                 value={values.name} className="form__input" placeholder="Введите имя"
                  required minLength="2" maxLength="30"
                  pattern="([а-яА-Яёa-zA-Z0-9.]|\s|-)*" onChange={handleChange}/>
-          {/*<span*/}
-          {/*  className={`error page-with-form__error ${*/}
-          {/*    registerError ? "page-with-form__error_active" : ""*/}
-          {/*  }`}>*/}
-          {/*      {registerError.message}*/}
-          {/*    </span>*/}
+          <span className={`${errors ? 'form__text_error' : 'form__text_error form__text_error_disabled'}`}>
+            {errors.name}
+          </span>
         </label>
         <label className="form__lable">
           <p className="form__text">E-mail</p>
           <input id="form__input-email" type="email" name="email"
-                 value={data.email} className="form__input" required placeholder="E-mail"
+                 value={values.email} className="form__input" required placeholder="Введите E-mail"
                  pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})" onChange={handleChange}/>
+          <span className={`${errors ? 'form__text_error' : 'form__text_error form__text_error_disabled'}`}>
+            {errors.email}
+          </span>
         </label>
         <label className="form__lable">
           <p className="form__text">Пароль</p>
           <input id="form__input-password" type="password" name="password"
-                 value={data.password} className="form__input form__input_error"
-                 required placeholder="" onChange={handleChange}/>
-          <p className="form__text form__text_error">Что-то пошло не так</p>
+                 value={values.password} className="form__input form__input_error"
+                 required minLength="5" placeholder="" onChange={handleChange}/>
+          <span className={`${errors ? 'form__text_error' : 'form__text_error form__text_error_disabled'}`}>
+            {errors.password}
+          </span>
         </label>
-        <button type="submit" className={`${props.isValid ? 'form__submit-button' :
+        <button type="submit" className={`${isValid ? 'form__submit-button' :
           'form__submit-button form__submit-button_novalidate'}`}
-                // disabled={!props.isValid}
-        >Зарегистрироваться
+                disabled={!isValid}>Зарегистрироваться
         </button>
       </form>
       <div className="form__link-block">

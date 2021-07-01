@@ -18,7 +18,7 @@ import newMoviesApi from "../../utils/MoviesApi";
 import Popup from "../Popup/Popup";
 import useFormWithValidation from "../FormValidator/FormValidator";
 
-function App(props) {
+function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const {pathname} = useLocation();
   const history = useHistory();

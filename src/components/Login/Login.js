@@ -1,21 +1,15 @@
 import React from "react";
 import logo from "../../images/logo.svg";
 import {Link} from 'react-router-dom';
-
+import useFormWithValidation from "../FormValidator/FormValidator";
 
 function Login(props) {
 
-  function handleChange(e) {
-    const {name, value} = e.target;
-    props.onEnter({
-      ...props.data,
-      [name]: value
-    })
-  }
+  const {values, handleChange, resetForm, errors, isValid} = useFormWithValidation()
 
   function handleSubmit(e) {
-    const {email, password} = props.data;
     e.preventDefault();
+    const {email, password} = values;
     props.onAutorization({email, password})
   }
 
@@ -29,19 +23,27 @@ function Login(props) {
         <label className="form__lable">
           <p className="form__text">E-mail</p>
           <input id="form__input-email" type="email" name="email"
-                 value={props.data.email} className="form__input" required
-                 placeholder="E-mail" pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})"
+                 value={values.email} className="form__input" required
+                 placeholder="Введите E-mail" pattern="([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})"
                  onChange={handleChange}/>
+          <span className={`${errors ? 'form__text_error' : 'form__text_error form__text_error_disabled'}`}>
+            {errors.email}
+          </span>
         </label>
         <label className="form__lable">
           <p className="form__text">Пароль</p>
           <input id="form__input-password" type="password" name="password"
-                 value={props.data.password} className="form__input form__input_error"
+                 value={values.password} className="form__input form__input_error"
                  placeholder="" required minLength="2" maxLength="10"
                  onChange={handleChange}/>
-          <p className="form__text form__text_error">Что-то пошло не так</p>
+          <span className={`${errors ? 'form__text_error' : 'form__text_error form__text_error_disabled'}`}>
+            {errors.password}
+          </span>
         </label>
-        <button type="submit" className="form__submit-button">Войти</button>
+        <button type="submit" className={`${isValid ? 'form__submit-button' :
+          'form__submit-button form__submit-button_novalidate'}`}
+                disabled={!isValid}>Войти
+        </button>
       </form>
       <div className="form__link-block">
         <p className="form__link-text">Еще не зарегистрированы?</p>
