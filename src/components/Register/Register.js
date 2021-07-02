@@ -51,7 +51,7 @@ function Register(props) {
         </label>
         <button type="submit" className={`${isValid ? 'form__submit-button' :
           'form__submit-button form__submit-button_novalidate'}`}
-                disabled={!isValid}>Зарегистрироваться
+                disabled={!isValid} onClick={props.onPopupOpen}>Зарегистрироваться
         </button>
       </form>
       <div className="form__link-block">

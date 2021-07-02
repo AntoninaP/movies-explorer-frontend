@@ -42,7 +42,7 @@ function Login(props) {
         </label>
         <button type="submit" className={`${isValid ? 'form__submit-button' :
           'form__submit-button form__submit-button_novalidate'}`}
-                disabled={!isValid}>Войти
+                disabled={!isValid} onClick={props.onPopupOpen}>Войти
         </button>
       </form>
       <div className="form__link-block">

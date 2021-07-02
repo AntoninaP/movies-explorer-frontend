@@ -17,7 +17,6 @@ import newMainApi from "../../utils/MainApi";
 import newMoviesApi from "../../utils/MoviesApi";
 import Popup from "../Popup/Popup";
 import useFormWithValidation from "../FormValidator/FormValidator";
-import Preloader from "../Preloader/Preloader";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -33,6 +32,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({_id: '', name: '', email: ''});
   const [editProfileStatus, setEditProfileStatus] = React.useState(false);
+  const [isStatusOk, setStatusOk] = React.useState(false);
 
   //константы для регистрации, авторизации
   const [data, setData] = React.useState({
@@ -68,9 +68,11 @@ function App() {
   function handleRegistration({name, email, password}) {
     Auth.registration({name, email, password})
       .then(() => {
+        setStatusOk(true);
         history.push('/signin')
       })
       .catch((err) => {
+        setStatusOk(false);
         console.log('error', err)
       })
   }
@@ -82,9 +84,11 @@ function App() {
         localStorage.setItem('jwt', data.token);
         newMainApi.setToken();
         setLoggedIn(true);
+        setStatusOk(true);
         history.push('/movies');
       })
       .catch((err) => {
+        setStatusOk(false);
         console.log('error', err)
       })
   }
@@ -151,6 +155,7 @@ function App() {
   React.useEffect(() => {
     newMoviesApi.getInitialMovies()
       .then((data) => {
+        console.log(data)
         setMovies(data)
       })
       .catch((err) => {
@@ -167,9 +172,9 @@ function App() {
     setPreloaderOn(false)
   }
 
-  function handleMovieSearch(value) {
+  function handleMovieSearch(value, onlyShort) {
     preloaderOn();
-    // setTimeout(() => {
+    setTimeout(() => {
       let a = [];
       movies.forEach(movie => {
         if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
@@ -180,13 +185,14 @@ function App() {
           if (isLiked(movie.id)) {
             foundMovie.owner = currentUser._id;
           }
-          a.push(foundMovie);
+          if (!onlyShort || movie.duration < 40) {
+            a.push(foundMovie);
+          }
         }
       })
       preloaderOff();
       setSearchedMovies(a);
-    // }, 5000)
-
+    }, 1000)
   }
 
   //проверяем наличие лайка по id
@@ -222,7 +228,6 @@ function App() {
   }
 
   function handleMovieDislike(movieId) {
-    console.log(movieId)
     newMainApi.deleteMovie(movieId)
       .then(() => {
         getSaveMovies()
@@ -250,7 +255,7 @@ function App() {
             <ProtectedRoute path="/movies"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
-                            onPreloaderOn={preloaderOn}
+                            isPreloaderOn={isPreloaderOn}
                             onSearch={handleMovieSearch}
                             component={Movies}
                             movies={searchedMovies}
@@ -280,13 +285,15 @@ function App() {
           <Switch>
             <Route path="/signup">
               <Register onRegister={handleRegistration}
-                        isValidate={useFormWithValidation}/>
+                        isValidate={useFormWithValidation}
+                        onPopupOpen={handlePopupOpen}/>
             </Route>
             <Route path="/signin">
               <Login
                 data={data}
                 onEnter={setData}
-                onAutorization={handleAuthorization}/>
+                onAutorization={handleAuthorization}
+                onPopupOpen={handlePopupOpen}/>
             </Route>
           </Switch>
           <Menu
@@ -297,9 +304,7 @@ function App() {
             isOpen={isPopupOpen}
             onPopupClose={handlePopupCloseButtonClick}
             isEditProfileSuccessful={editProfileStatus}
-          />
-          <Preloader
-          isOn={isPreloaderOn}
+            isStatusOk={isStatusOk}
           />
         </div>
       </div>

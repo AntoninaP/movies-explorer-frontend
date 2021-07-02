@@ -6,7 +6,7 @@ import close_ico from "../../images/close_ico.svg";
 function Popup(props) {
 
   const texts = {
-    titleOne: 'Вы успешно изменили профиль!',
+    titleOne: 'Успешно!',
     titleTwo: 'Что-то пошло не так!\n' +
       'Попробуйте ещё раз.'
   }
@@ -18,10 +18,10 @@ function Popup(props) {
         <img src={close_ico} alt="иконка закрытия попапа"
              className="popup__close-button"
              onClick={props.onPopupClose}/>
-          <img src={props.isEditProfileSuccessful ? ok : err}
+          <img src={props.isEditProfileSuccessful || props.isStatusOk ? ok : err}
                alt="значок статуса регистрации" className="popup__reg-ico"/>
           <h3 className="popup__title">
-            {props.isEditProfileSuccessful ? texts.titleOne : texts.titleTwo}</h3>
+            {props.isEditProfileSuccessful || props.isStatusOk ? texts.titleOne : texts.titleTwo}</h3>
         </div>
       </div>
   )

@@ -8,45 +8,16 @@ function Profile(props) {
 
   const {values, handleChange, resetForm, errors, isValid} = useFormWithValidation()
 
-  // const [name, setName] = React.useState('');
-  // const [email, setEmail] = React.useState('');
-  //
-  // function handleChangeName(e) {
-  //   console.log(e.target.value)
-  //   setName(e.target.value);
-  // }
-  //
-  // function handleChangeEmail(e) {
-  //   setEmail(e.target.value);
-  // }
-
 // Подписка на контекст
   const currentUser = React.useContext(CurrentUserContext);
-
-// После загрузки текущего пользователя из API
-// его данные будут использованы в управляемых компонентах.
-//   React.useEffect(() => {
-//     setName(currentUser.name);
-//     setEmail(currentUser.email);
-//   }, [currentUser]);
-
+  const isCurrentName = values.name === currentUser.name;
+  const isCurrentEmail = values.email === currentUser.email;
 
   function handleSubmit(e) {
     e.preventDefault();
     const {name, email} = values;
     props.onUpdateUser({name, email});
   }
-
-  // function handleSubmit(e) {
-  //   // Запрещаем браузеру переходить по адресу формы
-  //   e.preventDefault();
-  //
-  //   // Передаём значения управляемых компонентов во внешний обработчик
-  //   props.onUpdateUser({
-  //     name: values.name,
-  //     email: values.email,
-  //   });
-  // }
 
   return (
     <section className="profile">
@@ -74,7 +45,7 @@ function Profile(props) {
           'profile__text_error profile__text_error_disabled'}`}>
             {errors.name}
           </span>
-        <button type="submit" className={`${isValid ? 'profile__edit-button' :
+        <button type="submit" className={`${isValid && isCurrentEmail && isCurrentName ? 'profile__edit-button' :
           'profile__edit-button profile__edit-button_novalidate'}`}
                 disabled={!isValid} onClick={props.onPopupOpen}>Редактировать
         </button>

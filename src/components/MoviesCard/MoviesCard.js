@@ -27,7 +27,7 @@ function MoviesCard(props) {
       <div className="moviescard__description">
         <div className="moviescard__text">
           <h3 className="moviescard__title">{props.movie.nameRU}</h3>
-          <p className="moviescard__duration">{props.movie.duration}</p>
+          <p className="moviescard__duration">{props.movie.duration} мин</p>
         </div>
         <button className={`moviescard__likebutton ${buttonClass}`}
                 onClick={handleLike}></button>
