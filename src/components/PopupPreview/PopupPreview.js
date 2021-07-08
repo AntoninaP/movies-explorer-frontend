@@ -11,7 +11,7 @@ function PopupPreview(props) {
              className="popup-preview__close-button"
              onClick={props.onClose}/>
         <video className='popup-preview_video'
-                src={props.movie.trailerLink}>
+                src={props.movie.trailerLink} crossOrigin>
         </video>
       </div>
     </section>

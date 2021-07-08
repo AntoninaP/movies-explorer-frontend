@@ -45,25 +45,49 @@ function App() {
   const [isPopupOpen, setPopupOpen] = React.useState(false);
 
 //фильмы
-  const [movies, setMovies] = React.useState([]);
+  const [moviesFromApi, setMoviesFromApi] = React.useState([]);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isPreloaderOn, setPreloaderOn] = React.useState(false);
+  const [movies, setMovies] = React.useState([]);
+  const [clickCounter, changeClickCounter] = React.useState(1);
+
+  const [showMore, setShowMore] = React.useState(true);
+
+  function countClick() {
+    changeClickCounter(clickCounter+1)
+  }
 
 //методы для регистрации, авторизации
   React.useEffect(() => {
     if (loggedIn) {
       history.push('/movies');
+      console.log(typeof localStorage.getItem("movies"))
+      if (localStorage.getItem("movies")) {
+        setSearchedMovies(JSON.parse(localStorage.getItem("movies")))
+      }
     }
-  }, [history, loggedIn])
-
-  React.useEffect(() => {
     tokenCheck();
   }, [history, loggedIn])
 
   React.useEffect(() => {
-    setSearchedMovies([])
-  }, [history])
+
+  }, [history, loggedIn])
+
+  React.useEffect(() => {
+    const movies = searchedMovies.slice(0,clickCounter*3)
+    if (movies.length === searchedMovies.length) {
+      setShowMore(false)
+    } else {
+      setShowMore(true)
+    }
+    setMovies(movies)
+    movies.forEach((movie) => {
+      if (!isLiked(movie.id)) {
+        movie.owner = null
+      }
+    })
+  }, [clickCounter, savedMovies, searchedMovies])
 
   function handleRegistration({name, email, password}) {
     Auth.registration({name, email, password})
@@ -156,7 +180,7 @@ function App() {
     newMoviesApi.getInitialMovies()
       .then((data) => {
         console.log(data)
-        setMovies(data)
+        setMoviesFromApi(data)
       })
       .catch((err) => {
         console.log('error', err)
@@ -175,8 +199,8 @@ function App() {
   function handleMovieSearch(value, onlyShort) {
     preloaderOn();
     setTimeout(() => {
-      let a = [];
-      movies.forEach(movie => {
+      const a = [];
+      moviesFromApi.forEach((movie) => {
         if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
           movie.nameEN != null && movie.nameEN.indexOf(value) !== -1) {
           const foundMovie = JSON.parse(JSON.stringify(movie))
@@ -185,15 +209,36 @@ function App() {
           if (isLiked(movie.id)) {
             foundMovie.owner = currentUser._id;
           }
-          if (!onlyShort || movie.duration < 40) {
+          if ((!onlyShort || movie.duration < 40)) {
             a.push(foundMovie);
           }
         }
       })
       preloaderOff();
       setSearchedMovies(a);
+      changeClickCounter(1);
+      localStorage.setItem("movies", JSON.stringify(a))
     }, 1000)
   }
+
+  //поиск по сохраненным фильмам
+  function handleSavedMovieSearch(value, onlyShort) {
+    preloaderOn();
+    getSaveMovies().then((movies)=>{
+      let a = [];
+      movies.forEach(movie => {
+        if (movie.nameRU != null && movie.nameRU.indexOf(value) !== -1 ||
+          movie.nameEN != null && movie.nameEN.indexOf(value) !== -1) {
+          if (!onlyShort || movie.duration < 40) {
+            a.push(movie);
+          }
+        }
+      })
+      preloaderOff();
+      setSavedMovies(a);
+    })
+  }
+
 
   //проверяем наличие лайка по id
   function isLiked(movieId) {
@@ -218,9 +263,10 @@ function App() {
   }
 
   function getSaveMovies() {
-    newMainApi.getMovies()
+    return newMainApi.getMovies()
       .then((movies) => {
         setSavedMovies(movies);
+        return movies
       })
       .catch((err) => {
         console.log('error', err)
@@ -258,13 +304,17 @@ function App() {
                             isPreloaderOn={isPreloaderOn}
                             onSearch={handleMovieSearch}
                             component={Movies}
-                            movies={searchedMovies}
+                            movies={movies}
                             saveMovie={handleMovieLike}
                             deleteMovie={handleMovieDislike}
+                            countClick={countClick}
+                            isShowMore={showMore}
             />
             <ProtectedRoute path="/saved-movies"
                             loggedIn={loggedIn}
                             onMenuOpen={handleMenuButtonClick}
+                            isPreloaderOn={isPreloaderOn}
+                            onSearch={handleSavedMovieSearch}
                             component={SavedMovies}
                             movies={savedMovies}
                             deleteMovie={handleMovieDislike}

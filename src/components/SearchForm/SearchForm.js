@@ -3,7 +3,9 @@ import icon from "../../images/icon.svg";
 
 function SearchForm(props) {
 
-  const [data, setData] = React.useState({});
+  const [data, setData] = React.useState({
+    tumbler: false
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -13,8 +15,9 @@ function SearchForm(props) {
   function handleChange(e) {
     let {name, value} = e.target;
 
+    console.log(e)
     if (name === "tumbler") {
-      value = !e.target.checked
+      value = !!e.target.checked
     }
 
     setData({
@@ -22,6 +25,8 @@ function SearchForm(props) {
       [name]: value
     })
   }
+
+  console.log("data.tumbler", data.tumbler)
 
   return (
 

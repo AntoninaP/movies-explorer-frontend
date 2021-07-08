@@ -4,20 +4,13 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
-
-  const [clickCounter, changeClickCounter] = React.useState(0);
-
-  function countClicks() {
-    changeClickCounter(clickCounter + 1);
-    console.log(clickCounter)
-  }
-
+  console.log(props.movies)
   return (
     <section className="movies">
       <SearchForm onSearch={props.onSearch}/>
       <Preloader isOn={props.isPreloaderOn}/>
       <MoviesCardList movies={props.movies} setLike={props.saveMovie} setDislike={props.deleteMovie}/>
-      <button className="movies__button" onClick={countClicks}>Еще</button>
+      <button className={props.isShowMore ? "movies__button" : 'movies__button_disabled' } onClick={props.countClick}>Еще</button>
     </section>
   );
 }

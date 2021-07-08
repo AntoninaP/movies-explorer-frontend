@@ -20,6 +20,10 @@
     margin: 50px 0 80px 0;
 }
 
+.movies__button_disabled {
+    display: none;
+}
+
 .movies__button:hover {
     cursor: pointer;
     font-weight: 520;

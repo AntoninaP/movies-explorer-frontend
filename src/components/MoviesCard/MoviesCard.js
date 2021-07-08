@@ -5,7 +5,7 @@ function MoviesCard(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const isLiked = props.movie.owner === currentUser._id;
 
-  // console.log(props.movie.nameRU, props.movie.owner, currentUser._id)
+  console.log(props.movie.nameRU, props.movie.owner, currentUser._id)
 
   function handleLike(e) {
     if (isLiked) {
@@ -14,6 +14,13 @@ function MoviesCard(props) {
       props.setLike(props.movie)
     }
   }
+
+  function onClick() {
+    window.open(props.movie.trailerLink);
+  }
+
+  const durationHour = Math.floor(props.movie.duration / 60)
+  const durationMinutes = Math.round(props.movie.duration % 60)
 
   let buttonClass = 'moviescard__likebutton'
   if (props.fromSaved) {
@@ -27,13 +34,13 @@ function MoviesCard(props) {
       <div className="moviescard__description">
         <div className="moviescard__text">
           <h3 className="moviescard__title">{props.movie.nameRU}</h3>
-          <p className="moviescard__duration">{props.movie.duration} мин</p>
+          <p className="moviescard__duration">{durationHour}ч {durationMinutes}мин</p>
         </div>
         <button className={`moviescard__likebutton ${buttonClass}`}
                 onClick={handleLike}></button>
       </div>
       <img src={props.movie.image} alt="кадр из фильма" className="moviescard__picture"
-           onClick={props.onPopupPreviewOpen}/>
+           onClick={onClick}/>
     </div>
   );
 }

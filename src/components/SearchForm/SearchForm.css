@@ -27,7 +27,7 @@
     font-weight: 400;
     border: none;
     margin-left: 22px;
-    width: 300px;
+    width: 150px;
 }
 
 .searchform__input:focus {
@@ -75,11 +75,11 @@
     display: inline-block;
     width: 36px;
     height: 20px;
-    background: url("../../images/smalltumb.svg") 0 0 no-repeat;
+    background: url("../../images/smalltumboff.svg") 0 0 no-repeat;
 }
 
 .searchform__tumb input[type=checkbox]:checked {
-    background-image: url("../../images/smalltumboff.svg");
+    background-image: url("../../images/smalltumb.svg");
 }
 
 .searchform__tumb input[type=checkbox]:hover {
