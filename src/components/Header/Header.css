@@ -1,0 +1,75 @@
+.header {
+    width: calc(100% - 2 * 70px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+
+.header__logo {
+    width: 38px;
+    height: 38px;
+    margin: 18px 0 18px 0;
+}
+
+.header__signup {
+    width: 77px;
+    height: 16px;
+    color: #FFFFFF;
+    background-color: #202020;
+    border: none;
+    margin: 29px 30px 29px 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.header__signup:hover {
+    border-bottom: 1px solid #FFFFFF;
+    font-weight: 520;
+    opacity: 60%;
+    transition: opacity linear 2s;
+}
+
+.header__signin {
+    color: #000000;
+    background-color: #3DDC84;
+    border: none;
+    border-radius: 3px;
+    padding: 8px 20px 8px 20px;
+    margin: 21px 0 21px 0;
+    text-decoration: none;
+}
+
+.header__signin:hover {
+    font-weight: 520;
+    text-decoration: underline;
+    opacity: 60%;
+    transition: opacity linear 2s;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        width: calc(100% - 2 * 30px);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header {
+        width: calc(100% - 2 * 14px);
+        font-size: 10px;
+    }
+
+    .header__signin {
+        padding: 5px 12px 5px 12px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .header__signup {
+        margin-right: 26px;
+    }
+}
+

@@ -1,0 +1,113 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navigation__link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-left: 16px;
+}
+
+.navigation__link:hover {
+    font-weight: 450;
+    text-decoration: underline;
+}
+
+.navigation__link_hidden {
+    visibility: hidden;
+}
+
+.navigation__menu-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation__profile-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navigation__account {
+    color: #FFFFFF;
+    font-size: 13px;
+    line-height: 12px;
+    font-weight: 500;
+    margin: 0 7px 0 0;
+    padding: 0;
+}
+
+.navigation__account:hover {
+    font-weight: 510;
+    text-decoration: underline;
+}
+
+.navigation__account-ico {
+    width: 24px;
+    height: 24px;
+}
+
+.navigation__burger-ico {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    .navigation__links {
+        display: none;
+    }
+
+    .navigation__profile-block {
+        display: none;
+    }
+
+    .navigation__burger-ico {
+        display: block;
+        width: 44px;
+        height: 44px;
+    }
+
+    .navigation__burger-ico:hover {
+        cursor: pointer;
+        opacity: 60%;
+        transition: opacity linear 2s;
+    }
+
+    .navigation__links_popup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 159px;
+    }
+
+    .navigation__link_popup {
+        visibility: visible;
+        font-size: 18px;
+        line-height: 21.78px;
+        font-weight: 500;
+        margin: 0 0 28px 0;
+    }
+
+    .navigation__profile-block_popup {
+        display: flex;
+        margin-bottom: 90px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .navigation__burger-ico {
+        width: 40px;
+        height: 43px;
+    }
+}
